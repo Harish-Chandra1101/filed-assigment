@@ -25,3 +25,25 @@ class AudioFileView(viewsets.ViewSet):
             data=resp_data,
             status=status_obj
         )
+
+    def delete_audio_file(self, request, **kwargs):
+        resp_data = AudioFileHandler.delete_audio_file(request, kwargs)
+        if resp_data.get('errors'):
+            status_obj = status.HTTP_400_BAD_REQUEST
+        else:
+            status_obj = status.HTTP_200_OK
+        return Response(
+            data=resp_data,
+            status=status_obj
+        )
+
+    def get_audio_file(self, request, **kwargs):
+        resp_data = AudioFileHandler.get_audio_file(request, kwargs)
+        if resp_data.get('errors'):
+            status_obj = status.HTTP_400_BAD_REQUEST
+        else:
+            status_obj = status.HTTP_200_OK
+        return Response(
+            data=resp_data,
+            status=status_obj
+        )
