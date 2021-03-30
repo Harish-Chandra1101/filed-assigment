@@ -1,0 +1,116 @@
+{
+	"info": {
+		"_postman_id": "7e49cd9f-6f86-478c-8322-42c139f49431",
+		"name": "Audio-Files-APIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create audio file",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"audioFileType\": \"Audiobook\",\r\n    \"audioFileMetadata\": {\r\n        \"title\": \"Harish\",\r\n        \"duration_in_secs\": 100,\r\n        \"uploaded_time\": \"2021-03-29 21:30:56\",\r\n        \"author\": \"Amish\",\r\n        \"narrator\": \"asdff\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/audio-api/create/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"audio-api",
+						"create",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update audio file",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"audioFileType\": \"Song\",\r\n    \"audioFileMetadata\": {\r\n        \"duration_in_secs\": 20\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/audio-api/update/Song/2/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"audio-api",
+						"update",
+						"Song",
+						"2",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete audio file",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/audio-api/remove/Song/10/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"audio-api",
+						"remove",
+						"Song",
+						"10",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get audio file/s",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/audio-api/fetch/Song/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"audio-api",
+						"fetch",
+						"Song",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
