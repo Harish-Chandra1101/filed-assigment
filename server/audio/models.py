@@ -1,6 +1,6 @@
 from django.db import models
 
-# Create your models here.
+#NOTE: Skipping id field, as django adds an id field by default
 
 class Song(models.Model):
     name = models.CharField(max_length=100)

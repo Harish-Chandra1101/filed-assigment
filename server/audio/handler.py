@@ -3,7 +3,7 @@ from .serializers import (
     PodcastFileSerializer,
     AudiobookFileSerializer,
 )
-from .models import (
+from audio.models import (
     Song,
     Podcast,
     Audiobook,
@@ -15,7 +15,12 @@ from django.core.exceptions import ObjectDoesNotExist
 class AudioFileHandler:
 
     @staticmethod
-    def create_audio_file(request):
+    def create_audio_file(request) -> GenericResponse:
+        """
+        Handler function to create audio file of different types
+        :param request:
+        :return:
+        """
         file_type = request.data.get('audioFileType') or ''
         serializer_class = AudioFileHandler.get_serializer_class(file_type)
         if not serializer_class:
@@ -34,7 +39,13 @@ class AudioFileHandler:
         )
 
     @staticmethod
-    def update_audio_file(request, url_args):
+    def update_audio_file(request, url_args: dict) -> GenericResponse:
+        """
+        Handler function to update audio files of different types
+        :param request:
+        :param url_args:
+        :return:
+        """
         file_data = request.data.get('audioFileMetadata') or {}
         validated_data = AudioFileHandler.get_and_validate_url_args(url_args)
         if not validated_data['valid']:
@@ -65,7 +76,12 @@ class AudioFileHandler:
         )
 
     @staticmethod
-    def get_serializer_class(file_type):
+    def get_serializer_class(file_type: str):
+        """
+        Function to get the serializer class for a given file type
+        :param file_type:
+        :return:
+        """
         serializer_class = {
                                'Song': SongFileSerializer,
                                'Podcast': PodcastFileSerializer,
@@ -74,7 +90,13 @@ class AudioFileHandler:
         return serializer_class
 
     @staticmethod
-    def get_and_validate_url_args(url_args, id_required=True):
+    def get_and_validate_url_args(url_args: dict, id_required=True) -> dict:
+        """
+        Function to get and validate the url arguments
+        :param url_args:
+        :param id_required:
+        :return return_value:
+        """
         file_type = url_args.get('audioFileType') or ''
         file_id = url_args.get('audioFileID')
         return_value = {
@@ -98,7 +120,13 @@ class AudioFileHandler:
         return return_value
 
     @staticmethod
-    def delete_audio_file(request, url_args):
+    def delete_audio_file(request, url_args: dict) -> GenericResponse:
+        """
+        Handler function to delete an audio file based on id
+        :param request:
+        :param url_args:
+        :return:
+        """
         validated_data = AudioFileHandler.get_and_validate_url_args(url_args)
         if not validated_data['valid']:
             return GenericResponse.get_error_response(
@@ -123,7 +151,13 @@ class AudioFileHandler:
             )
 
     @staticmethod
-    def get_audio_file(request, url_args):
+    def get_audio_file(request, url_args: dict) -> GenericResponse:
+        """
+        Handler function to get audio file/s
+        :param request:
+        :param url_args:
+        :return:
+        """
         validated_data = AudioFileHandler.get_and_validate_url_args(url_args, id_required=False)
         file_type = validated_data['file_type']
         file_id = validated_data['file_id']
